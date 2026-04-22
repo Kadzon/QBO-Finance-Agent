@@ -38,6 +38,10 @@ Thumbs.db
 .env.*
 !.env.example
 
+# Local-only planning / instruction docs
+CLAUDE.md
+PLAN.md
+
 # Runtime artifacts
 *.duckdb
 *.duckdb.wal
