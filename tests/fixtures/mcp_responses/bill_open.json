@@ -1,0 +1,37 @@
+{
+  "Id": "501",
+  "DocNumber": "BILL-501",
+  "TxnDate": "2026-01-20",
+  "DueDate": "2026-02-20",
+  "CurrencyRef": {"value": "USD"},
+  "VendorRef": {"value": "88", "name": "Cloud Host Co"},
+  "TotalAmt": 450.00,
+  "Balance": 450.00,
+  "PrivateNote": "Monthly hosting",
+  "Line": [
+    {
+      "Id": "1",
+      "LineNum": 1,
+      "Description": "Production cluster",
+      "Amount": 300.00,
+      "DetailType": "AccountBasedExpenseLineDetail",
+      "AccountBasedExpenseLineDetail": {
+        "AccountRef": {"value": "120", "name": "Hosting"}
+      }
+    },
+    {
+      "Id": "2",
+      "LineNum": 2,
+      "Description": "Backup storage",
+      "Amount": 150.00,
+      "DetailType": "AccountBasedExpenseLineDetail",
+      "AccountBasedExpenseLineDetail": {
+        "AccountRef": {"value": "120", "name": "Hosting"}
+      }
+    }
+  ],
+  "MetaData": {
+    "CreateTime": "2026-01-20T08:00:00-08:00",
+    "LastUpdatedTime": "2026-01-20T08:00:00-08:00"
+  }
+}

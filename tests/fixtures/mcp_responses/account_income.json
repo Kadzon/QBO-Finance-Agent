@@ -1,0 +1,16 @@
+{
+  "Id": "79",
+  "Name": "Services",
+  "FullyQualifiedName": "Services",
+  "AccountType": "Income",
+  "AccountSubType": "ServiceFeeIncome",
+  "Classification": "Revenue",
+  "Active": true,
+  "CurrentBalance": 0,
+  "CurrencyRef": {"value": "USD", "name": "United States Dollar"},
+  "ParentRef": {"value": "42", "name": "Revenue"},
+  "MetaData": {
+    "CreateTime": "2026-01-15T09:00:00-08:00",
+    "LastUpdatedTime": "2026-03-18T14:30:00-08:00"
+  }
+}

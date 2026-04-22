@@ -1,0 +1,26 @@
+{
+  "Id": "3001",
+  "PaymentType": "CreditCard",
+  "TxnDate": "2026-03-02",
+  "CurrencyRef": {"value": "USD"},
+  "AccountRef": {"value": "150", "name": "Business CC"},
+  "EntityRef": {"value": "92", "name": "Office Supplies Co", "type": "Vendor"},
+  "TotalAmt": 127.44,
+  "PrivateNote": "Printer paper + toner",
+  "Line": [
+    {
+      "Id": "1",
+      "LineNum": 1,
+      "Description": "Office supplies",
+      "Amount": 127.44,
+      "DetailType": "AccountBasedExpenseLineDetail",
+      "AccountBasedExpenseLineDetail": {
+        "AccountRef": {"value": "200", "name": "Office Supplies"}
+      }
+    }
+  ],
+  "MetaData": {
+    "CreateTime": "2026-03-02T14:30:00-08:00",
+    "LastUpdatedTime": "2026-03-02T14:30:00-08:00"
+  }
+}

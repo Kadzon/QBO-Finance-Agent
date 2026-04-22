@@ -1,0 +1,16 @@
+{
+  "Id": "T-777",
+  "TxnDate": "2026-01-15",
+  "TxnType": "Invoice",
+  "DocNumber": "INV-1001",
+  "AccountRef": {"value": "79", "name": "Services"},
+  "EntityRef": {"value": "55", "name": "Acme Corp", "type": "Customer"},
+  "Amount": 2500.00,
+  "Credit": 2500.00,
+  "Debit": 0.00,
+  "Memo": "Consulting — January",
+  "MetaData": {
+    "CreateTime": "2026-01-15T09:30:00-08:00",
+    "LastUpdatedTime": "2026-01-15T09:30:00-08:00"
+  }
+}

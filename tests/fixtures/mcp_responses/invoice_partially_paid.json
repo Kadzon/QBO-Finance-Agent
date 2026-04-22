@@ -1,0 +1,49 @@
+{
+  "Id": "1001",
+  "DocNumber": "INV-1001",
+  "TxnDate": "2026-01-15",
+  "DueDate": "2026-02-15",
+  "CurrencyRef": {"value": "USD"},
+  "CustomerRef": {"value": "55", "name": "Acme Corp"},
+  "TotalAmt": 2500.00,
+  "Balance": 1250.00,
+  "EmailStatus": "EmailSent",
+  "PrivateNote": "Net 30 terms",
+  "Line": [
+    {
+      "Id": "1",
+      "LineNum": 1,
+      "Description": "Consulting — January",
+      "Amount": 2000.00,
+      "DetailType": "SalesItemLineDetail",
+      "SalesItemLineDetail": {
+        "ItemRef": {"value": "23", "name": "Consulting"},
+        "ItemAccountRef": {"value": "79", "name": "Services"},
+        "UnitPrice": 200.00,
+        "Qty": 10
+      }
+    },
+    {
+      "Id": "2",
+      "LineNum": 2,
+      "Description": "On-site travel",
+      "Amount": 500.00,
+      "DetailType": "SalesItemLineDetail",
+      "SalesItemLineDetail": {
+        "ItemRef": {"value": "24", "name": "Travel"},
+        "ItemAccountRef": {"value": "79", "name": "Services"},
+        "UnitPrice": 500.00,
+        "Qty": 1
+      }
+    },
+    {
+      "Amount": 2500.00,
+      "DetailType": "SubTotalLineDetail",
+      "SubTotalLineDetail": {}
+    }
+  ],
+  "MetaData": {
+    "CreateTime": "2026-01-15T09:30:00-08:00",
+    "LastUpdatedTime": "2026-02-10T11:00:00-08:00"
+  }
+}

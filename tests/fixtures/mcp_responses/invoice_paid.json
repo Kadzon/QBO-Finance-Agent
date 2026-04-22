@@ -1,0 +1,30 @@
+{
+  "Id": "1002",
+  "DocNumber": "INV-1002",
+  "TxnDate": "2026-02-01",
+  "DueDate": "2026-03-01",
+  "CurrencyRef": {"value": "USD"},
+  "CustomerRef": {"value": "56", "name": "Beta LLC"},
+  "TotalAmt": 800.00,
+  "Balance": 0.00,
+  "EmailStatus": "EmailSent",
+  "Line": [
+    {
+      "Id": "1",
+      "LineNum": 1,
+      "Description": "Retainer",
+      "Amount": 800.00,
+      "DetailType": "SalesItemLineDetail",
+      "SalesItemLineDetail": {
+        "ItemRef": {"value": "23"},
+        "ItemAccountRef": {"value": "79"},
+        "UnitPrice": 800.00,
+        "Qty": 1
+      }
+    }
+  ],
+  "MetaData": {
+    "CreateTime": "2026-02-01T10:00:00-08:00",
+    "LastUpdatedTime": "2026-02-20T15:00:00-08:00"
+  }
+}

@@ -33,10 +33,31 @@ def test_version_flag(runner: CliRunner) -> None:
     assert __version__ in result.stdout
 
 
-def test_sync_is_a_stub(runner: CliRunner) -> None:
+def test_sync_fails_clearly_when_mcp_unconfigured(
+    runner: CliRunner, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    for var in (
+        "QBAGENT_MCP_SERVER_COMMAND",
+        "QUICKBOOKS_CLIENT_ID",
+        "QUICKBOOKS_CLIENT_SECRET",
+        "QUICKBOOKS_REALM_ID",
+        "QUICKBOOKS_REFRESH_TOKEN",
+    ):
+        monkeypatch.delenv(var, raising=False)
     result = runner.invoke(app, ["sync"])
-    assert result.exit_code == 0
-    assert "(stub)" in result.stdout.lower()
+    assert result.exit_code == 2  # ConfigError path
+    assert "MCP" in result.stderr or "QuickBooks" in result.stderr
+
+
+def test_sync_rejects_unknown_entity(runner: CliRunner, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("QBAGENT_MCP_SERVER_COMMAND", "dummy")
+    monkeypatch.setenv("QUICKBOOKS_CLIENT_ID", "id")
+    monkeypatch.setenv("QUICKBOOKS_CLIENT_SECRET", "s")
+    monkeypatch.setenv("QUICKBOOKS_REALM_ID", "r")
+    monkeypatch.setenv("QUICKBOOKS_REFRESH_TOKEN", "t")
+    result = runner.invoke(app, ["sync", "--entity", "widgets"])
+    assert result.exit_code != 0
+    assert "unknown entity" in (result.stdout + result.stderr).lower()
 
 
 def test_ask_is_a_stub(runner: CliRunner) -> None:

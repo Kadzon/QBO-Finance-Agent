@@ -17,8 +17,11 @@ from rich.table import Table
 
 from qbagent import __version__
 from qbagent.config import ConfigError, Settings, get_settings
+from qbagent.db.backend import Backend
 from qbagent.db.factory import create_backend
 from qbagent.llm.provider import LiteLLMProvider, LLMError
+from qbagent.sync.mcp_client import CANONICAL_ENTITIES, StdioMCPClient
+from qbagent.sync.sync_runner import SyncReport, SyncRunner
 
 app = typer.Typer(
     name="qbagent",
@@ -63,11 +66,62 @@ def sync(
     ] = None,
 ) -> None:
     """Pull QuickBooks data into the local analytical DB."""
-    mode = "full" if full else "incremental"
-    scope = entity or "all entities"
+    settings = get_settings(refresh=True)
+    try:
+        settings.require_backend()
+        settings.require_mcp()
+        settings.require_qbo()
+    except ConfigError as exc:
+        err_console.print(f"[red]config error:[/red] {exc}")
+        raise typer.Exit(code=2) from exc
+
+    if entity is not None and entity not in CANONICAL_ENTITIES:
+        raise typer.BadParameter(
+            f"unknown entity {entity!r}. Valid: {', '.join(CANONICAL_ENTITIES)}"
+        )
+    entities = [entity] if entity else None
+
+    report = asyncio.run(_run_sync(settings, full=full, entities=entities))
+
+    table = Table(title="Sync report", show_header=True, header_style="bold")
+    table.add_column("Entity")
+    table.add_column("Status")
+    table.add_column("Rows")
+    table.add_column("Detail", overflow="fold")
+    for r in report.results:
+        style = {"success": "green", "error": "red", "skipped": "yellow"}.get(r.status, "white")
+        detail = r.error or (f"cursor={r.cursor}" if r.cursor else "")
+        table.add_row(r.entity, f"[{style}]{r.status}[/{style}]", str(r.rows_synced), detail)
+    console.print(table)
     console.print(
-        f"[dim](stub)[/dim] would run a [bold]{mode}[/bold] sync for [bold]{scope}[/bold]."
+        f"Total rows: [bold]{report.total_rows}[/bold]  "
+        f"Elapsed: [bold]{(report.finished_at - report.started_at).total_seconds():.2f}s[/bold]"
     )
+    if not report.ok:
+        raise typer.Exit(code=1)
+
+
+async def _run_sync(
+    settings: Settings,
+    *,
+    full: bool,
+    entities: list[str] | None,
+) -> SyncReport:
+    backend: Backend = create_backend(settings)
+    await backend.connect()
+    try:
+        await backend.initialize_schema()
+        client = StdioMCPClient(settings)
+        await client.connect()
+        try:
+            runner = SyncRunner(client, backend)
+            if full:
+                return await runner.sync_full(entities)
+            return await runner.sync_incremental(entities)
+        finally:
+            await client.close()
+    finally:
+        await backend.close()
 
 
 @app.command()

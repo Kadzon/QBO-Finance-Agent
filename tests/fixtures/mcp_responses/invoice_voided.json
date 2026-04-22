@@ -1,0 +1,28 @@
+{
+  "Id": "1003",
+  "DocNumber": "INV-1003",
+  "TxnDate": "2026-02-05",
+  "CurrencyRef": {"value": "USD"},
+  "CustomerRef": {"value": "57", "name": "Gamma Inc"},
+  "TotalAmt": 0.00,
+  "Balance": 0.00,
+  "Voided": true,
+  "PrivateNote": "Voided — duplicated billing",
+  "Line": [
+    {
+      "Id": "1",
+      "LineNum": 1,
+      "Amount": 0.00,
+      "DetailType": "SalesItemLineDetail",
+      "SalesItemLineDetail": {
+        "ItemAccountRef": {"value": "79"},
+        "UnitPrice": 0.00,
+        "Qty": 0
+      }
+    }
+  ],
+  "MetaData": {
+    "CreateTime": "2026-02-05T09:00:00-08:00",
+    "LastUpdatedTime": "2026-02-05T12:00:00-08:00"
+  }
+}
