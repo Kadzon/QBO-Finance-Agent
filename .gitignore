@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+.eggs/
+build/
+dist/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+
+# Tooling caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Environment + secrets
+.env
+.env.*
+!.env.example
+
+# Runtime artifacts
+*.duckdb
+*.duckdb.wal
+*.sqlite
+*.sqlite3
+*.db
+qbagent.log*
+
+# Node (MCP servers installed locally)
+node_modules/
